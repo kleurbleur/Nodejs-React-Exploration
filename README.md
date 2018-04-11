@@ -1,1 +1,1 @@
-node-easy-notes-app
+self-entitled
