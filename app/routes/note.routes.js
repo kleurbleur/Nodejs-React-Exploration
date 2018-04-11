@@ -1,0 +1,22 @@
+module.exports = function(app) {
+
+    var notes = require('../controllers/note.controller.js');
+
+    // Create a new Note
+    app.post('/notes', notes.create);
+
+    // Retrieve all Notes
+    app.get('/notes', notes.findAll);
+
+    // Retrieve a single Note with noteId
+    app.get('/notes/:noteId', notes.findOne);
+
+    // Retrieve a single Note containing a defined word
+    app.get('/notes/search/:word', notes.findWord);
+
+    // Update a Note with noteId
+    app.put('/notes/:noteId', notes.update);
+
+    // Delete a Note with noteId
+    app.delete('/notes/:noteId', notes.delete);
+}
