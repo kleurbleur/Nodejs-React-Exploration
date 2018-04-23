@@ -1,14 +1,19 @@
 var express = require('express');
-var bodyParser = require('body-parser');
+var path = require('path');
+var logger = require('morgan');
+// var bodyParser = require('body-parser');
 
 // create express App
 var app = express();
 
+// log the requests
+app.use(logger('dev'));
+
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: true}))
+// app.use(bodyParser.urlencoded({extended: true}))
 
 // parse requests of content-type -application/json
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
 
 // configuring the database
 var dbConfig = require('./config/database.config.js');
@@ -25,6 +30,9 @@ mongoose.connection.on('error', function() {
 mongoose.connection.once('open', function() {
   console.log('Succesfully connected to the database');
 })
+
+// use the public folder for the frontend files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // define a simple route
 app.get('/', function(req,res){
